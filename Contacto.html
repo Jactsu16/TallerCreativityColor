@@ -108,20 +108,20 @@
                 <!-- Contact Form -->
                 <div id="contact-form" class="bg-light-gray rounded-2xl p-8 shadow-lg">
                     <h3 class="text-3xl font-bold text-dark-blue mb-6">Envíanos un mensaje</h3>
-                    <form class="space-y-6">
+                    <form class="space-y-6" id="contactForm">
                         <div>
                             <label class="block text-medium-blue font-medium mb-2">Nombre completo</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="Tu nombre completo">
+                            <input type="text" id="nombre" name="nombre" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="Tu nombre completo">
                         </div>
                         
                         <div>
                             <label class="block text-medium-blue font-medium mb-2">Correo electrónico</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="tu@email.com">
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="tu@email.com">
                         </div>
                         
                         <div>
                             <label class="block text-medium-blue font-medium mb-2">Número de teléfono</label>
-                            <input type="tel" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="(+507) 6543-2100">
+                            <input type="tel" id="telefono" name="telefono" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="(+507) 6543-2100">
                         </div>
                         
                         <div>
@@ -142,7 +142,7 @@
                         
                         <div>
                             <label class="block text-medium-blue font-medium mb-2">Mensaje</label>
-                            <textarea rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="Cuéntanos sobre tu proyecto o consulta..."></textarea>
+                            <textarea rows="5" id="mensaje-texto" name="mensaje-texto" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" placeholder="Cuéntanos sobre tu proyecto o consulta..."></textarea>
                         </div>
                         
                         <button type="submit" class="btn whatsapp-btn w-full bg-vibrant-yellow hover:bg-yellow-400 text-dark-blue font-bold py-4 px-6 rounded-lg text-lg transition-all transform hover:scale-105 shadow-lg" id="whatsappBtn">
