@@ -919,7 +919,7 @@ legend {
 }
 
 menu,
-/* Asegura que los enlaces no cambien de formato */
+/* Asegurar que los enlaces no cambien de formato */
 .nav-link {
   text-decoration: none !important;
   display: inline-block;
