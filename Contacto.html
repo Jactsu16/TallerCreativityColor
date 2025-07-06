@@ -126,16 +126,17 @@
                         
                         <div>
                             <label class="block text-medium-blue font-medium mb-2">Tipo de servicio</label>
-                            <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors">
-                                <option>Selecciona un servicio</option>
-                                <option>Chapistería General</option>
-                                <option>Modificaciones</option>
-                                <option>Instalación de accesorios</option>
-                                <option>Limpieza de interiores</option>
-                                <option>Pintura automotriz</option>
-                                <option>Restauración completa</option>
-                                <option>Pulimiento</option>
-                                <option>Cotización general</option>
+                            <select id="servicio" name="servicio" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors">
+                                <option value="">Selecciona un servicio</option>
+                                <option value="Chapistería General">Chapistería General</option>
+                                <option value="Modificaciones">Modificaciones</option>
+                                <option value="Instalación de accesorios">Instalación de accesorios</option>
+                                <option value="Limpieza de interiores">Limpieza de interiores</option>
+                                <option value="Pintura automotriz">Pintura automotriz</option>
+                                <option value="Restauración completa">Restauración completa</option>
+                                <option value="Pulimiento">Pulimiento</option>
+                                <option value="Cotización general">Cotización general</option>
+                                <option value="Otro">Otro</option>
                             </select>
                         </div>
                         
@@ -354,133 +355,33 @@
             }, 1500);
         });
         // Configuración
-        const CONFIG = {
-            // Cambia este número por el tuyo (formato: código de país + número)
-            whatsappNumber: '50765300791', // Ejemplo: +507 1234-5678 se convierte en 50712345678
-            emailDestino: 'jabdulth2004@gmail.com' // Cambia por tu email
-        };
+        const NUMERO_WHATSAPP = '50765300791'; // Tu número real
 
-        function mostrarMensaje(texto, tipo) {
-            const mensajeDiv = document.getElementById('mensaje');
-            mensajeDiv.textContent = texto;
-            mensajeDiv.className = `mensaje ${tipo}`;
-            mensajeDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                mensajeDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        function validarFormulario() {
-            const campos = ['nombre', 'email', 'telefono', 'servicio', 'mensaje-texto'];
-            
-            for (let campo of campos) {
-                const elemento = document.getElementById(campo);
-                if (!elemento.value.trim()) {
-                    mostrarMensaje('Por favor, completa todos los campos obligatorios.', 'error');
-                    elemento.focus();
-                    return false;
+            function enviarWhatsApp() {
+                const nombre = document.getElementById('nombre').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const telefono = document.getElementById('telefono').value.trim();
+                const servicio = document.getElementById('servicio').value;
+                const mensaje = document.getElementById('mensaje-texto').value.trim();
+                
+                if (!nombre || !email || !servicio) {
+                    alert('Por favor completa todos los campos requeridos');
+                    return;
                 }
+                let whatsappMsg = `🚗 *SOLICITUD DE SERVICIO AUTOMOTRIZ*\n\n`;
+                whatsappMsg += `👤 *Cliente:* ${nombre}\n`;
+                whatsappMsg += `📧 *Email:* ${email}\n`;
+                if (telefono) whatsappMsg += `📱 *Teléfono:* ${telefono}\n`;
+                whatsappMsg += `🔧 *Servicio solicitado:* ${servicio}\n\n`;
+                if (mensaje) whatsappMsg += `💬 *Detalles:*\n${mensaje}\n\n`;
+                whatsappMsg += `📅 *Fecha:* ${new Date().toLocaleDateString('es-ES')}`;
+                
+                window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
             }
-            
-            // Validar email
-            const email = document.getElementById('email').value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                mostrarMensaje('Por favor, ingresa un email válido.', 'error');
-                return false;
-            }
-            
-            return true;
-        }
 
-        function obtenerDatosFormulario() {
-            return {
-                nombre: document.getElementById('nombre').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                telefono: document.getElementById('telefono').value.trim(),
-                servicio: document.getElementById('servicio').value,
-                mensaje: document.getElementById('mensaje-texto').value.trim()
-            };
-        }
-
-        function enviarPorWhatsApp() {
-            if (!validarFormulario()) return;
-            
-            const datos = obtenerDatosFormulario();
-            
-            // Obtener número de WhatsApp del input
-            const numeroWhatsApp = document.getElementById('whatsapp-numero').value.trim();
-            // Limpiar el número (quitar espacios, guiones, etc.)
-            const numeroLimpio = numeroWhatsApp.replace(/[\s\-\(\)]/g, '');
-            
-            // Crear mensaje para WhatsApp
-            const mensaje = `¡Hola! 👋
-
-                *Solicitud de servicio automotriz*
-
-                👤 *Nombre:* ${datos.nombre}
-                📧 *Email:* ${datos.email}
-                📞 *Teléfono:* ${datos.telefono}
-                🔧 *Servicio:* ${datos.servicio}
-
-                💬 *Mensaje:*
-                ${datos.mensaje}
-
-                ---
-                _Enviado desde el formulario web_`;
-
-            // Crear URL de WhatsApp
-            const whatsappURL = `https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`;
-            
-            // Abrir WhatsApp
-            window.open(whatsappURL, '_blank');
-            
-            // Opcional: limpiar formulario después de enviar
-            document.getElementById('contactForm').reset();
-        }
-
-        function enviarPorEmail() {
-            if (!validarFormulario()) return;
-            
-            const datos = obtenerDatosFormulario();
-            
-            // Crear contenido del email
-            const asunto = `Solicitud de ${datos.servicio} - ${datos.nombre}`;
-            const cuerpo = `Nombre: ${datos.nombre}
-            Email: ${datos.email}
-            Teléfono: ${datos.telefono}
-            Servicio: ${datos.servicio}
-            Mensaje:
-            ${datos.mensaje}`;
-
-            // Crear mailto link
-            const mailtoLink = `mailto:${CONFIG.emailDestino}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-            
-            // Abrir cliente de email
-            window.location.href = mailtoLink;
-            
-            // Opcional: limpiar formulario después de enviar
-            document.getElementById('contactForm').reset();
-        }
-
-        // Event listeners
-        document.getElementById('whatsappBtn').addEventListener('click', enviarPorWhatsApp);
-        document.getElementById('emailBtn').addEventListener('click', enviarPorEmail);
-
-        // Actualizar número de WhatsApp cuando cambie el input
-        document.getElementById('whatsapp-numero').addEventListener('input', function() {
-            const numero = this.value.replace(/[\s\-\(\)]/g, '');
-            // Actualizar CONFIG si quieres que sea dinámico
-            CONFIG.whatsappNumber = numero;
-        });
-
-        // Validación en tiempo real
-        document.getElementById('contactForm').addEventListener('input', function() {
-            const mensaje = document.getElementById('mensaje');
-            if (mensaje.style.display === 'block') {
-                mensaje.style.display = 'none';
-            }
-        });
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                enviarWhatsApp();
+            });
     </script>
 </html>
