@@ -208,6 +208,16 @@
                     id="contactForm"
                     >
 
+                    <!-- CAMPOS OCULTOS PARA SERVICIOS -->
+                    <input type="hidden" name="servicio_1" id="servicio_1" value="">
+                    <input type="hidden" name="servicio_2" id="servicio_2" value="">
+                    <input type="hidden" name="servicio_3" id="servicio_3" value="">
+                    <input type="hidden" name="servicio_4" id="servicio_4" value="">
+                    <input type="hidden" name="servicio_5" id="servicio_5" value="">
+                    <input type="hidden" name="total_servicios" id="total_servicios" value="">
+                    <input type="hidden" name="total_precio" id="total_precio" value="">
+
+                    <!-- CAMPOS DEL FORMULARIO -->
                     <div>
                         <label class="block text-medium-blue font-medium mb-2" for="Nombre">Su Nombre</label>
                         <input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-turquoise focus:outline-none transition-colors" id="Nombre" name="Nombre" placeholder="Tu nombre completo" required  />
@@ -253,6 +263,44 @@
                             <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-paper-plane" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"></path></svg></i>
                             Enviar mensaje</button>
                     </div>
+                    <!-- SCRIPT PARA LA SECCION INVISIBLE -->
+                    <script>
+                        // Función simple: copia lo del carrito a los campos ocultos
+                        function copiarCarritoAFormulario() {
+                            // Limpiar campos primero
+                            for (let i = 1; i <= 5; i++) {
+                                document.getElementById(`servicio_${i}`).value = '';
+                            }
+                            
+                            // Si hay carrito, copiar los datos
+                            if (typeof carrito !== 'undefined' && carrito.length > 0) {
+                                carrito.forEach((item, index) => {
+                                    if (index < 5) { // Máximo 5
+                                        const campo = document.getElementById(`servicio_${index + 1}`);
+                                        campo.value = `${item.codigo} - ${item.nombre} - ${item.precio}`;
+                                    }
+                                });
+                                
+                                // Total
+                                const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+                                document.getElementById('total_servicios').value = `Total: ${total}`;
+                            } else {
+                                document.getElementById('total_servicios').value = '';
+                            }
+                        }
+                        
+                        // Ejecutar cuando cambie el carrito
+                        if (typeof window.actualizarCarrito === 'function') {
+                            const original = window.actualizarCarrito;
+                            window.actualizarCarrito = function() {
+                                original();
+                                copiarCarritoAFormulario();
+                            };
+                        }
+                        
+                        // Ejecutar al cargar
+                        setTimeout(copiarCarritoAFormulario, 100);
+                    </script>
                 </form>
                 </div>
         </div>
@@ -341,6 +389,7 @@
 
         // Carrito de servicios
         let carrito = [];
+        let servicioURLYaConsumido = false; // Para controlar que el servicio de URL solo se agregue una vez
 
         // Función para obtener parámetros de URL
         function obtenerParametroURL(nombre) {
@@ -359,6 +408,7 @@
                         precio: servicio.precio
                     });
                     actualizarCarrito();
+                    console.log('✅ Servicio agregado:', servicio.nombre);
                 }
             } else {
                 alert('Este servicio ya está en tu carrito');
@@ -369,12 +419,18 @@
         function eliminarDelCarrito(codigo) {
             carrito = carrito.filter(item => item.codigo !== codigo);
             actualizarCarrito();
+            console.log('🗑️ Servicio eliminado:', codigo);
         }
 
         // Función para actualizar la visualización del carrito
         function actualizarCarrito() {
             const carritoItems = document.getElementById('carrito-items');
             const totalPrecio = document.getElementById('total-precio');
+            
+            if (!carritoItems || !totalPrecio) {
+                console.error('❌ Elementos del carrito no encontrados');
+                return;
+            }
             
             if (carrito.length === 0) {
                 carritoItems.innerHTML = `
@@ -436,7 +492,7 @@
                                     margin: 0;
                                     font-size: 1.2rem;
                                     font-weight: bold;
-                                    color: #1e40af; /* Dark Blue */
+                                    color: #1e40af;
                                 }
                                     h2 {
                                         margin: 0;
@@ -446,11 +502,11 @@
                                     }
                             .item-codigo{
                                 font-size: 0.75rem;
-                                color: #4b5563; /* Medium Gray */
+                                color: #4b5563;
                             }
                             .item-precio {
                                 font-size: 1rem;
-                                color: #1e40af; /* Dark Blue */
+                                color: #1e40af;
                                 margin-top: 0.5rem;
                                 margin-bottom: 1rem;
                                 font-weight: bold;
@@ -465,7 +521,7 @@
                                 transition: background 0.3s ease;
                             }
                             .btn-eliminar:hover {
-                                background: #dc2626; /* Darker Red */
+                                background: #dc2626;
                             }
                         </style>
                         <h3>${item.nombre}</h3>
@@ -480,55 +536,75 @@
             });
 
             totalPrecio.textContent = `$${total}`;
+            console.log('🔄 Carrito actualizado. Total: $' + total);
         }
 
-        // Event listeners para agregar servicios
-        document.querySelectorAll('.btn-agregar').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const card = this.closest('.servicio-card');
-                const codigo = card.dataset.codigo;
-                agregarAlCarrito(codigo);
+        // Función para inicializar la página
+        function inicializarPagina() {
+            console.log('🚀 Inicializando página checkout...');
+            
+            // Verificar si hay un servicio en la URL y NO ha sido consumido
+            const servicioURL = obtenerParametroURL('servicio');
+            console.log('🔍 Parámetro de URL:', servicioURL);
+            
+            if (servicioURL && servicios[servicioURL] && !servicioURLYaConsumido) {
+                agregarAlCarrito(servicioURL);
+                servicioURLYaConsumido = true; // Marcar como consumido
+                console.log('🎯 Servicio de URL agregado y marcado como consumido');
+            }
+
+            // Event listeners para botones agregar de la página
+            const botonesAgregar = document.querySelectorAll('.btn-agregar');
+            console.log('🔘 Botones agregar encontrados:', botonesAgregar.length);
+            
+            botonesAgregar.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.servicio-card');
+                    const codigo = card.dataset.codigo;
+                    agregarAlCarrito(codigo);
+                });
             });
-        });
 
-        // Manejar envío del formulario
-        document.getElementById('formulario-cotizacion').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (carrito.length === 0) {
-                alert('Por favor, agrega al menos un servicio a tu carrito');
-                return;
+            // Manejar envío del formulario
+            const formulario = document.getElementById('formulario-cotizacion');
+            if (formulario) {
+                formulario.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (carrito.length === 0) {
+                        alert('Por favor, agrega al menos un servicio a tu carrito');
+                        return;
+                    }
+
+                    const formData = new FormData(this);
+                    const datos = {};
+                    for (let [key, value] of formData.entries()) {
+                        datos[key] = value;
+                    }
+                    
+                    datos.servicios = carrito;
+                    datos.total = carrito.reduce((sum, item) => sum + item.precio, 0);
+
+                    console.log('📋 Datos de cotización:', datos);
+                    alert('¡Cotización enviada exitosamente! Te contactaremos pronto.');
+                    
+                    this.reset();
+                    carrito = [];
+                    actualizarCarrito();
+                });
             }
 
-            const formData = new FormData(this);
-            const datos = {};
-            for (let [key, value] of formData.entries()) {
-                datos[key] = value;
-            }
-            
-            // Agregar servicios del carrito
-            datos.servicios = carrito;
-            datos.total = carrito.reduce((sum, item) => sum + item.precio, 0);
-
-            // Aquí puedes enviar los datos a tu servidor
-            console.log('Datos de cotización:', datos);
-            
-            // Simular envío exitoso
-            alert('¡Cotización enviada exitosamente! Te contactaremos pronto.');
-            
-            // Limpiar formulario y carrito
-            this.reset();
-            carrito = [];
             actualizarCarrito();
-        });
-
-        // Inicializar carrito al cargar la página
-        // Verificar si hay un servicio especificado en la URL
-        const servicioURL = obtenerParametroURL('servicio');
-        if (servicioURL && servicios[servicioURL]) {
-            agregarAlCarrito(servicioURL);
         }
 
-        // Actualizar carrito inicial
-        actualizarCarrito();
-    </script>
+        // ✅ ESPERAR A QUE EL DOM ESTÉ COMPLETAMENTE CARGADO
+        document.addEventListener('DOMContentLoaded', inicializarPagina);
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', inicializarPagina);
+        } else {
+            inicializarPagina();
+        }
+</script>
+</body>
+</html>
