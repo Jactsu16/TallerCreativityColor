@@ -164,9 +164,7 @@
                                 <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
                                     <strong>Código:</strong> CHAP-001
                                 </div>
-                                <a href="checkout.html"></a>
-                                    <button class="btn-carrito">Añadir al carrito</button>
-                                </a>
+                                <button class="btn-carrito" onclick="agregarAlCarrito('CHAP-001')">Añadir al carrito</button>
                             </div>
                         </a>
                     </div>
@@ -183,9 +181,7 @@
                                 <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
                                     <strong>Código:</strong> COLO-002
                                 </div>
-                                <a href="checkout.html">
-                                    <button class="btn-carrito">Añadir al carrito</button>
-                                </a>
+                                <button class="btn-carrito" onclick="agregarAlCarrito('COLO-002')">Añadir al carrito</button>
                             </div>
                         </a>
                     </div>
@@ -202,9 +198,7 @@
                                 <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
                                     <strong>Código:</strong> PULI-003
                                 </div>
-                                <a href="checkout.html">
-                                    <button class="btn-carrito">Añadir al carrito</button>
-                                </a>
+                                <button class="btn-carrito" onclick="agregarAlCarrito('PULI-003')">Añadir al carrito</button>
                             </div>
                         </a>
                     </div>
@@ -221,9 +215,7 @@
                                 <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
                                     <strong>Código:</strong> LIMP-004
                                 </div>
-                                <a href="checkout.html">
-                                <button class="btn-carrito">Añadir al carrito</button>
-                                </a>
+                                <button class="btn-carrito" onclick="agregarAlCarrito('LIMP-004')">Añadir al carrito</button>
                             </div>
                         </a>
                     </div>
@@ -240,9 +232,7 @@
                                 <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
                                     <strong>Código:</strong> MOD-005
                                 </div>
-                                <a href="checkout.html">
-                                <button class="btn-carrito">Añadir al carrito</button>
-                                </a>
+                                <button class="btn-carrito" onclick="agregarAlCarrito('MOD-005')">Añadir al carrito</button>
                             </div>
                         </a>
                     </div>
@@ -322,16 +312,10 @@
         </div>
     </footer>
     <script>
-function agregarAlCarrito(codigo) {
-    window.location.href = `carrito.html?servicio=${codigo}`;
-}
-
-<!-- Botones con JavaScript -->
-<button class="btn-carrito" onclick="agregarAlCarrito('CHAP-001')">Añadir al carrito</button>
-<button class="btn-carrito" onclick="agregarAlCarrito('COLO-002')">Añadir al carrito</button>
-<button class="btn-carrito" onclick="agregarAlCarrito('PULI-003')">Añadir al carrito</button>
-<button class="btn-carrito" onclick="agregarAlCarrito('LIMP-004')">Añadir al carrito</button>
-<button class="btn-carrito" onclick="agregarAlCarrito('MOD-005')">Añadir al carrito</button>
-    </script>
+        function agregarAlCarrito(codigo) {
+            console.log('Agregando al carrito:', codigo); // Para debug
+            window.location.href = `Checkout.html?servicio=${codigo}`;
+        }
+</script>
 </body>
 </html>
