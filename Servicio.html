@@ -416,5 +416,30 @@ ul {
             </div>
         </div>
     </footer>
+    document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const serviceCategories = document.querySelectorAll('.service-category');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to the clicked button
+            this.classList.add('active');
+
+            // Show or hide service categories based on the filter
+            serviceCategories.forEach(category => {
+                if (filterValue === 'all' || category.id === `${filterValue}-services`) {
+                    category.style.display = 'block'; // Show
+                } else {
+                    category.style.display = 'none'; // Hide
+                }
+            });
+        });
+    });
+});
+
                     </body>
                     </html>
