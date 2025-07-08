@@ -264,9 +264,7 @@
                 <div class="productos-grid">
                     <div class="producto">
                         <a href="#">
-                            <div style="height: 200px; background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: #9ca3af;">
-                                Imagen del Producto 1
-                            </div>
+                            <img src="https://img.freepik.com/foto-gratis/mecanico-automoviles-que-trabaja-garaje-servicio-reparacion_146671-18358.jpg" alt="Chapistería General" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             <div class="producto-info">
                                 <h3>Chapistería General</h3>
                                 <p class="producto-descripcion">Reparación completa de abolladuras, rayones, golpes y daños en la carrocería. Soldadura, masillado y preparación de superficies con técnicas profesionales.</p>
@@ -285,9 +283,7 @@
                     </div>
                     <div class="producto">
                         <a href="#">
-                            <div style="height: 200px; background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: #9ca3af;">
-                                Imagen del Producto 2
-                            </div>
+                            <img src="https://img.freepik.com/foto-gratis/vista-lateral-hombre-rociando-pintura-polvo-puerta-coche_23-2149714302.jpg" alt="Colorización Personalizada" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             <div class="producto-info">
                                 <h3>Colorización Personalizada</h3>
                                 <p class="producto-descripcion">Pintura automotriz con colores personalizados, acabados especiales, efectos metálicos y diseños únicos. Igualación perfecta de color.</p>
@@ -306,9 +302,7 @@
                     </div>
                     <div class="producto">
                         <a href="#">
-                            <div style="height: 200px; background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: #9ca3af;">
-                                Imagen del Producto 3
-                            </div>
+                           <img src="https://img.freepik.com/foto-gratis/primer-plano-proceso-cuidado-coche_23-2149193628.jpg" alt="Pulimiento Profesional" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             <div class="producto-info">
                                 <h3>Pulimiento Profesional</h3>
                                 <p class="producto-descripcion">Pulimiento y encerado profesional para restaurar el brillo original de la pintura. Eliminación de micro rayones y oxidación superficial.</p>
@@ -327,9 +321,7 @@
                     </div>
                     <div class="producto">
                         <a href="#">
-                            <div style="height: 200px; background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: #9ca3af;">
-                                Imagen del Producto 4
-                            </div>
+                            <img src="https://img.freepik.com/foto-gratis/hombre-polaco-salon-automovil-garaje_1157-36595.jpg" alt="Limpieza Interior" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             <div class="producto-info">
                                 <h3>Limpieza Interior</h3>
                                 <p class="producto-descripcion">Limpieza profunda de tapicería, alfombras, paneles y superficies. Desinfección y eliminación de olores con productos especializados.</p>
@@ -346,6 +338,26 @@
                             </div>
                         </a>
                     </div>
+                    <div class="producto">
+                        <a href="#">
+                            <img src="https://img.freepik.com/foto-gratis/vista-trasera-coche-deportivo-rojo-sintonizado-rueda-primer-plano_78492-3674.jpg" alt="Chapistería General" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <div class="producto-info">
+                                <h3>Modificaciones</h3>
+                                <p class="producto-descripcion">Limpieza profunda de tapicería, alfombras, paneles y superficies. Desinfección y eliminación de olores con productos especializados.</p>
+                                <div class="producto-precio">
+                                    <span class="precio-desde">Desde</span>
+                                    <span>$45</span>
+                                </div>
+                                <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
+                                    <strong>Código:</strong> MOD-005
+                                </div>
+                                <a href="checkout.html">
+                                <button class="btn-carrito">Añadir al carrito</button>
+                                </a>
+                            </div>
+                        </a>
+                    </div>
+                    
                 </div>
             </section>
         </div>
@@ -420,5 +432,17 @@
             </div>
         </div>
     </footer>
+    <script>
+function agregarAlCarrito(codigo) {
+    window.location.href = `carrito.html?servicio=${codigo}`;
+}
+</script>
+
+<!-- Botones con JavaScript -->
+<button class="btn-carrito" onclick="agregarAlCarrito('CHAP-001')">Añadir al carrito</button>
+<button class="btn-carrito" onclick="agregarAlCarrito('COLO-002')">Añadir al carrito</button>
+<button class="btn-carrito" onclick="agregarAlCarrito('PULI-003')">Añadir al carrito</button>
+<button class="btn-carrito" onclick="agregarAlCarrito('LIMP-004')">Añadir al carrito</button>
+<button class="btn-carrito" onclick="agregarAlCarrito('MOD-005')">Añadir al carrito</button>
 </body>
 </html>
