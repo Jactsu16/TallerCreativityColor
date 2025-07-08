@@ -229,14 +229,36 @@
 </head>
 
 <body>
-    <header>
-        <div class="container mx-auto">
-            <h1>Tienda - Taller Creativity Color</h1>
+    <header id="header" class="fixed top-0 w-full bg-white shadow-lg z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-turquoise to-medium-blue rounded-lg flex items-center justify-center">
+                    <i class="text-white text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-car" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="car" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"></path></svg></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-dark-blue">Taller Creativity Color</h1>
+                    <p class="text-sm text-medium-blue">Chapistería Profesional</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <ul class="flex space-x-8">
+                    <li><a href="Index.html" class="nav-link text-dark-blue hover:text-turquoise font-medium transition-colors cursor-pointer">Inicio</a></li>
+                    <li><a href="Servicio.html" class="nav-link text-dark-blue hover:text-turquoise font-medium transition-colors cursor-pointer">Servicios</a></li>
+                    <li><a href="Galeria.html" class="nav-link text-dark-blue hover:text-turquoise font-medium transition-colors cursor-pointer">Galería</a></li>
+                    <li><a href="Tienda.html" class="nav-link text-turquoise font-medium cursor-pointer">Tienda</a></li>
+                    <li><a href="Contacto.html" class="nav-link text-dark-blue hover:text-turquoise font-medium transition-colors cursor-pointer">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <button class="md:hidden text-dark-blue">
+                <i class="text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></i>
+            </button>
         </div>
     </header>
 
-    <main>
-        <div class="container mx-auto" style="padding: 0 1rem;">
+   <main>
+        <div class="container mx-auto" style="padding: 2rem;">
             <section id="productos">
                 <h2>Productos Destacados</h2>
                 <div class="productos-grid">
@@ -246,9 +268,18 @@
                                 Imagen del Producto 1
                             </div>
                             <div class="producto-info">
-                                <h3>Producto 1</h3>
-                                <p>Descripción del producto 1. Ideal para reparación automotriz.</p>
-                                <button class="btn-carrito">Añadir al carrito</button>
+                                <h3>Chapistería General</h3>
+                                <p class="producto-descripcion">Reparación completa de abolladuras, rayones, golpes y daños en la carrocería. Soldadura, masillado y preparación de superficies con técnicas profesionales.</p>
+                                <div class="producto-precio">
+                                    <span class="precio-desde">Desde</span>
+                                    <span>$50</span>
+                                </div>
+                                <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
+                                    <strong>Código:</strong> CHAP-001
+                                </div>
+                                <a href="checkout.html"></a>
+                                    <button class="btn-carrito">Añadir al carrito</button>
+                                </a>
                             </div>
                         </a>
                     </div>
@@ -258,9 +289,18 @@
                                 Imagen del Producto 2
                             </div>
                             <div class="producto-info">
-                                <h3>Producto 2</h3>
-                                <p>Descripción del producto 2. Perfecto para pintura automotriz.</p>
-                                <button class="btn-carrito">Añadir al carrito</button>
+                                <h3>Colorización Personalizada</h3>
+                                <p class="producto-descripcion">Pintura automotriz con colores personalizados, acabados especiales, efectos metálicos y diseños únicos. Igualación perfecta de color.</p>
+                                <div class="producto-precio">
+                                    <span class="precio-desde">Desde</span>
+                                    <span>$200</span>
+                                </div>
+                                <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
+                                    <strong>Código:</strong> COLO-002
+                                </div>
+                                <a href="checkout.html">
+                                    <button class="btn-carrito">Añadir al carrito</button>
+                                </a>
                             </div>
                         </a>
                     </div>
@@ -270,9 +310,18 @@
                                 Imagen del Producto 3
                             </div>
                             <div class="producto-info">
-                                <h3>Producto 3</h3>
-                                <p>Descripción del producto 3. Herramientas profesionales.</p>
-                                <button class="btn-carrito">Añadir al carrito</button>
+                                <h3>Pulimiento Profesional</h3>
+                                <p class="producto-descripcion">Pulimiento y encerado profesional para restaurar el brillo original de la pintura. Eliminación de micro rayones y oxidación superficial.</p>
+                                <div class="producto-precio">
+                                    <span class="precio-desde">Desde</span>
+                                    <span>$80</span>
+                                </div>
+                                <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
+                                    <strong>Código:</strong> PULI-003
+                                </div>
+                                <a href="checkout.html">
+                                    <button class="btn-carrito">Añadir al carrito</button>
+                                </a>
                             </div>
                         </a>
                     </div>
@@ -282,9 +331,18 @@
                                 Imagen del Producto 4
                             </div>
                             <div class="producto-info">
-                                <h3>Producto 4</h3>
-                                <p>Descripción del producto 4. Accesorios especializados.</p>
+                                <h3>Limpieza Interior</h3>
+                                <p class="producto-descripcion">Limpieza profunda de tapicería, alfombras, paneles y superficies. Desinfección y eliminación de olores con productos especializados.</p>
+                                <div class="producto-precio">
+                                    <span class="precio-desde">Desde</span>
+                                    <span>$30</span>
+                                </div>
+                                <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem;">
+                                    <strong>Código:</strong> LIMP-004
+                                </div>
+                                <a href="checkout.html">
                                 <button class="btn-carrito">Añadir al carrito</button>
+                                </a>
                             </div>
                         </a>
                     </div>
@@ -292,6 +350,7 @@
             </section>
         </div>
     </main>
+
     <footer id="footer" class="bg-dark-blue text-white py-16">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
